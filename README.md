@@ -1,6 +1,6 @@
 # 3D 列印成本計算機 (Web)
 
-此專案提供瀏覽器即可使用的 3D 列印成本計算工具，將逐步顯示每個成本項目的計算過程，方便分享與複製。
+此專案提供瀏覽器即可使用的 3D 列印成本計算工具，將逐步顯示每個成本項目的計算過程，方便分享與複製。所有耗材價格皆來自淘寶，同步加上 45 TWD/kg × 1.3 kg 的集運成本，故預設值相對便宜；若有不同採購來源，歡迎 fork 專案自行調整。原始碼採自由改作、可商用、無須記名授權，使用者可依需求延伸。
 
 ## 功能亮點
 
@@ -25,3 +25,25 @@
 3. 在瀏覽器開啟 `http://localhost:8000/index.html`，輸入列印參數後按下「計算成本」。
 
 計算完成後，可利用結果區右上方按鈕複製計算文字或分享帶參數連結。若僅需快速檢視，也可以直接以檔案模式開啟 `index.html`。
+
+---
+
+## English Overview
+
+This repository hosts a browser-based 3D printing cost calculator that mirrors the CLI workflow while adding sharable URLs, clipboard exports, and printer/material presets.
+
+### Highlights
+
+- Built-in presets for Bambu Lab P1S/P2S/H2S, including depreciation (4,000 h lifetime), power profiles, and nozzle amortization.
+- Filament prices are sourced from Taobao plus an additional 45 TWD/kg × 1.3 kg consolidation fee, so the defaults are intentionally low-cost. Feel free to fork and replace them to match your vendor.
+- Material selector covers PLA/PETG, ASA, ABS, ABS FR, ABS-GF, TPU 95A, and TPU for AMS, plus a custom-price mode.
+- Nozzle wear is calculated per kilogram (30 kg for general materials, 10 kg for CF) and shown alongside the machine depreciation formula.
+- Results can be copied as text or shared through a generated URL; “Clear Parameters” resets the form and the query string.
+
+### Usage
+
+1. `cd /var/www/html/service/app/cost-calculator-web`
+2. Serve the folder with any static server, e.g. `php -S 0.0.0.0:8000`.
+3. Open `http://localhost:8000/index.html`, adjust the presets or inputs, then click “Calculate”.
+
+The project is open for modification, commercial use, and redistribution without attribution—fork it and adapt it to your workflow.

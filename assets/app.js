@@ -145,7 +145,7 @@ const formFieldsMarkup = FIELD_CONFIG.map((field) => {
 app.innerHTML = `
   <div class="container">
     <h1>3D 列印成本計算機</h1>
-    <p class="lead">輸入列印條件與成本參數，可快速得到與 CLI 腳本一致的逐步計算結果，並支援分享連結與複製輸出。</p>
+    <p class="lead">輸入列印條件與成本參數，即可即時取得逐步計算結果，並支援分享連結與複製輸出。</p>
     <form id="cost-form">
       <div class="select-grid">
         <label for="machine-select">
