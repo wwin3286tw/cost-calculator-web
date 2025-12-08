@@ -14,15 +14,22 @@
 
 ## 使用方式
 
-1. 切換到專案資料夾：
-   ```bash
-   cd /var/www/html/service/app/cost-calculator-web
-   ```
-2. 使用任何靜態伺服器（例如 `python3 -m http.server 8000` 或 `php -S 0.0.0.0:8000`）啟動：
-   ```bash
-   php -S 0.0.0.0:8000
-   ```
-3. 在瀏覽器開啟 `http://localhost:8000/index.html`，輸入列印參數後按下「計算成本」。
+### 透過靜態伺服器快速預覽
+
+1. 使用任何靜態伺服器（例如 `python3 -m http.server 8000` 或 `php -S 0.0.0.0:8000`）啟動專案目錄。
+2. 在瀏覽器開啟 `http://localhost:8000/index.html`，輸入列印參數後按下「計算成本」。
+
+### 使用 Docker
+
+從專案根目錄執行下列指令，依需求挑選對應的 Dockerfile：
+
+| Web Server | 建置與執行指令 |
+| --- | --- |
+| nginx | `docker build -f docker/nginx/Dockerfile -t cost-calculator-web:nginx .`<br>`docker run --rm -p 8080:80 cost-calculator-web:nginx` |
+| Apache (httpd:2.4) | `docker build -f docker/apache/Dockerfile -t cost-calculator-web:apache .`<br>`docker run --rm -p 8080:80 cost-calculator-web:apache` |
+| httpd (Alpine) | `docker build -f docker/httpd/Dockerfile -t cost-calculator-web:httpd .`<br>`docker run --rm -p 8080:80 cost-calculator-web:httpd` |
+
+執行後即可在 `http://localhost:8080` 使用成本計算器。
 
 計算完成後，可利用結果區右上方按鈕複製計算文字或分享帶參數連結。若僅需快速檢視，也可以直接以檔案模式開啟 `index.html`。
 
@@ -30,7 +37,7 @@
 
 ## English Overview
 
-This repository hosts a browser-based 3D printing cost calculator that mirrors the CLI workflow while adding sharable URLs, clipboard exports, and printer/material presets.
+This repository hosts a browser-based 3D printing cost calculator with sharable URLs, clipboard exports, and printer/material presets.
 
 ### Highlights
 
@@ -42,8 +49,16 @@ This repository hosts a browser-based 3D printing cost calculator that mirrors t
 
 ### Usage
 
-1. `cd /var/www/html/service/app/cost-calculator-web`
-2. Serve the folder with any static server, e.g. `php -S 0.0.0.0:8000`.
-3. Open `http://localhost:8000/index.html`, adjust the presets or inputs, then click “Calculate”.
+**Quick preview:** Serve the repository root with any static server (e.g., `python3 -m http.server 8000` or `php -S 0.0.0.0:8000`), then open `http://localhost:8000/index.html`.
+
+**Docker options:** Build and run one of the provided images:
+
+| Web Server | Commands |
+| --- | --- |
+| nginx | `docker build -f docker/nginx/Dockerfile -t cost-calculator-web:nginx .`<br>`docker run --rm -p 8080:80 cost-calculator-web:nginx` |
+| Apache (httpd:2.4) | `docker build -f docker/apache/Dockerfile -t cost-calculator-web:apache .`<br>`docker run --rm -p 8080:80 cost-calculator-web:apache` |
+| httpd (Alpine) | `docker build -f docker/httpd/Dockerfile -t cost-calculator-web:httpd .`<br>`docker run --rm -p 8080:80 cost-calculator-web:httpd` |
+
+After launching, browse to `http://localhost:8080` to use the calculator.
 
 The project is open for modification, commercial use, and redistribution without attribution—fork it and adapt it to your workflow.
