@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Nginx 版本（推薦用於生產環境，體積小、效能好）
+  web-nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: cost-calculator-nginx
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - web-network
+
+  # Apache httpd 版本（標準版）
+  web-apache:
+    build:
+      context: .
+      dockerfile: docker/apache/Dockerfile
+    container_name: cost-calculator-apache
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    networks:
+      - web-network
+    profiles:
+      - apache
+
+  # httpd Alpine 版本（輕量版）
+  web-httpd:
+    build:
+      context: .
+      dockerfile: docker/httpd/Dockerfile
+    container_name: cost-calculator-httpd
+    ports:
+      - "8082:80"
+    restart: unless-stopped
+    networks:
+      - web-network
+    profiles:
+      - httpd
+
+networks:
+  web-network:
+    driver: bridge
