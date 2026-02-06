@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Nginx 版本（推薦用於生產環境，體積小、效能好）
   web-nginx:
