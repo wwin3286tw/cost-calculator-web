@@ -31,6 +31,25 @@
 
 執行後即可在 `http://localhost:8080` 使用成本計算器。
 
+### 使用 Docker Compose（推薦）
+
+從專案根目錄執行：
+
+```bash
+docker compose up web-nginx
+```
+
+預設會啟動 Nginx 版本，並對外綁定 `http://localhost:8080`。
+
+若需要 Apache 或 Alpine httpd，可使用 profile：
+
+```bash
+docker compose --profile apache up web-apache
+docker compose --profile httpd up web-httpd
+```
+
+Apache 版本對外埠為 `http://localhost:8081`，Alpine httpd 版本為 `http://localhost:8082`。
+
 計算完成後，可利用結果區右上方按鈕複製計算文字或分享帶參數連結。若僅需快速檢視，也可以直接以檔案模式開啟 `index.html`。
 
 ---
@@ -60,5 +79,22 @@ This repository hosts a browser-based 3D printing cost calculator with sharable 
 | httpd (Alpine) | `docker build -f docker/httpd/Dockerfile -t cost-calculator-web:httpd .`<br>`docker run --rm -p 8080:80 cost-calculator-web:httpd` |
 
 After launching, browse to `http://localhost:8080` to use the calculator.
+
+**Docker Compose (recommended):** Launch the default Nginx service from the repo root:
+
+```bash
+docker compose up web-nginx
+```
+
+The Nginx service listens on `http://localhost:8080`.
+
+To start Apache or Alpine httpd, use profiles:
+
+```bash
+docker compose --profile apache up web-apache
+docker compose --profile httpd up web-httpd
+```
+
+Apache maps to `http://localhost:8081`, and Alpine httpd maps to `http://localhost:8082`.
 
 The project is open for modification, commercial use, and redistribution without attribution—fork it and adapt it to your workflow.
